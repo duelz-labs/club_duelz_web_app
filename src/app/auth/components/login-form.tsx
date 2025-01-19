@@ -1,48 +1,64 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { login } from '@/services/auth.service';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
-export function LoginForm() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+const LoginForm: React.FC = () => {
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    setIsLoading(true)
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const success = await login(email, password);
+      if (success) {
+        alert("let's dribble!");
+        router.push('/my-duelz');
+      } else {
+        throw new Error("login service call returned false!");
+      }
+    } catch (error) {
+      console.log(error);
+      alert('something went wrong while cleaning your studs, please try again!');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
     <Card>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>
-            Enter your email and password to login to your account
-          </CardDescription>
+          <CardDescription>welcome back, champ</CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
           <div className="space-y-1">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="name@example.com" required />
+            <Input id="email" type="email" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} autoComplete='email' required />
           </div>
           <div className="space-y-1">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required />
+            <Input id="password" type="password" placeholder="top#secret" onChange={(e) => setPassword(e.target.value)} autoComplete='current-password' required />
           </div>
         </CardContent>
         <CardFooter>
           <Button className="w-full" type="submit" disabled={isLoading}>
-            {isLoading ? "Logging in..." : "Login"}
+            {isLoading ? "Logging In..." : "Login"}
           </Button>
         </CardFooter>
       </form>
     </Card>
   )
 }
+
+export default LoginForm;

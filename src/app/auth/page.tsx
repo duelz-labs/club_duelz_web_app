@@ -1,15 +1,15 @@
 import ThemeToggle from '@/components/theme/theme-toggle';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LoginForm } from './components/login-form';
-import { SignupForm } from './components/signup-form';
+import LoginForm from './components/login-form';
+import SignupForm from './components/signup-form';
 
 export default function AuthPage() {
   return (
     <>
-      <div className="absolute right-4 top-4">
-        <ThemeToggle />
-      </div>
       <div className="container relative flex h-screen w-screen flex-col items-center justify-center">
+        <div className="absolute right-4 top-4">
+          <ThemeToggle />
+        </div>
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
             <div className="mx-auto mb-4 h-20 w-20 rounded-full bg-primary text-primary-foreground">
@@ -26,9 +26,9 @@ export default function AuthPage() {
                 <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
               </svg>
             </div>
-            <h1 className="text-2xl font-semibold tracking-tight">Welcome to Club Duelz</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">CLUB DUELZ</h1>
             <p className="text-sm text-muted-foreground">
-              Sign in to your account or create a new one
+              rise above the rest and conquer the leaderboards!
             </p>
           </div>
           <Tabs defaultValue="login" className="w-full">
