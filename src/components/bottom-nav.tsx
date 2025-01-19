@@ -1,11 +1,13 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Home, User } from 'lucide-react'
+import { Home, User } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React from "react";
 
-export function BottomNav() {
-  const pathname = usePathname()
+const BottomNav: React.FC = () => {
+
+  const pathname = usePathname();
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-background border-t border-border">
@@ -28,3 +30,5 @@ export function BottomNav() {
     </nav>
   )
 }
+
+export default BottomNav;

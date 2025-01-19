@@ -1,13 +1,14 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { Moon, Sun } from 'lucide-react'
-import { useTheme } from "next-themes"
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from "next-themes";
+import React from "react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
-export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+const ThemeToggle: React.FC = () => {
+
+  const { theme, setTheme } = useTheme();
 
   return (
     <Button
@@ -21,3 +22,5 @@ export function ThemeToggle() {
     </Button>
   )
 }
+
+export default ThemeToggle;
